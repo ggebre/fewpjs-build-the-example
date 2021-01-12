@@ -14,25 +14,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (like.textContent === EMPTY_HEART) {
           mimicServerCall()
           .then(json => {
-            like.setAttribute('class', 'activated-heart');
-            like.innerText = FULL_HEART
+            // like.setAttribute('class', 'activated-heart');
+            // like.innerText = FULL_HEART
+
+            changeAttributeForAnElement(like, 'activated-heart', FULL_HEART);
           })
           .catch(error => {
-            errorElement.setAttribute('class', "");
-            errorElement.innerText = `${error.message}`
+            // errorElement.setAttribute('class', "");
+            // errorElement.innerText = `${error.message}`
+            changeAttributeForAnElement(errorElement, '', error.message);
+
             setTimeout(() => {
-              errorElement.setAttribute('class', "hidden");
+              // errorElement.setAttribute('class', "hidden");
+            changeAttributeForAnElement(errorElement, 'hidden', '');
+
             }, 5000);
             
           });
           
         } else {
-          like.setAttribute('class', '');
-          like.innerText = EMPTY_HEART
+          // like.setAttribute('class', '');
+          // like.innerText = EMPTY_HEART
+          changeAttributeForAnElement(like, '', EMPTY_HEART);
+
         }
       });
     })
-
+  
+    function changeAttributeForAnElement(element, className, text){
+      element.setAttribute('class', className);
+      element.innerText = text;
+    }
 })
 
 
